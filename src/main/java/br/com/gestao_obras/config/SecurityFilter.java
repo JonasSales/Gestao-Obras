@@ -13,17 +13,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import java.io.IOException;
 
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
 
 
-    final
-    JwtUtil jwtUtil;
+    final JwtUtil jwtUtil;
 
-    final
-    UserRepository userRepository;
+    final UserRepository userRepository;
 
     public SecurityFilter(JwtUtil jwtUtil, UserRepository userRepository) {
         this.jwtUtil = jwtUtil;
@@ -33,25 +30,31 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
                                     @NonNull HttpServletResponse response,
-                                    @NonNull FilterChain filterChain) throws  IOException {
+                                    @NonNull FilterChain filterChain) {
         try {
             String token = this.recoverToken(request);
             if (token != null) {
                 String subject = jwtUtil.validateToken(token);
-                UserDetails userDetails = userRepository.findByEmail(subject).get();
+                var optionalUser = userRepository.findByEmail(subject);
 
-                var authentication = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities()
-                );
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+                if (optionalUser.isPresent()) {
+                    UserDetails userDetails = optionalUser.get();
+
+                    var authentication = new UsernamePasswordAuthenticationToken(
+                            userDetails, null, userDetails.getAuthorities()
+                    );
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                } else {
+                    SecurityContextHolder.clearContext();
+                }
             }
 
             filterChain.doFilter(request, response);
 
-        } catch (Exception e){
+        } catch (Exception e) {
+            SecurityContextHolder.clearContext();
             throw new RuntimeException(e);
         }
-
     }
 
 

@@ -2,14 +2,16 @@ package br.com.gestao_obras.service;
 
 import br.com.gestao_obras.dto.Request.LoginRequest;
 import br.com.gestao_obras.dto.Request.RegisterRequest;
+import br.com.gestao_obras.dto.Request.UpdateResquest;
 import br.com.gestao_obras.dto.Response.LoginResponse;
-import br.com.gestao_obras.dto.Response.UserRegisterResponse;
+import br.com.gestao_obras.dto.Response.UserResponse;
 import br.com.gestao_obras.model.Role;
 import br.com.gestao_obras.model.User;
 import br.com.gestao_obras.repository.RoleRepository;
 import br.com.gestao_obras.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,9 +32,12 @@ public class UserService {
         this.jwtUtil = jwtUtil;
     }
 
+    private User findOrElseThrow(String email){
+        return userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+    }
+
     public ResponseEntity<LoginResponse> login(LoginRequest req) {
-        User user = userRepository.findByEmail(req.email())
-                .orElseThrow(() -> new RuntimeException("Credenciais inválidas"));
+        User user = findOrElseThrow(req.email());
         if (!passwordEncoder.matches(req.password(), user.getPassword())) {
             throw new RuntimeException("Credenciais inválidas");
         }
@@ -41,7 +46,7 @@ public class UserService {
         return ResponseEntity.ok(new LoginResponse(token));
     }
 
-    public ResponseEntity<UserRegisterResponse> registerUser(RegisterRequest registerRequest) {
+    public ResponseEntity<UserResponse> registerUser(RegisterRequest registerRequest) {
 
         if (userRepository.findByEmail(registerRequest.getEmail()).isPresent()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -58,8 +63,37 @@ public class UserService {
 
         userRepository.save(user);
 
-        return ResponseEntity.status(HttpStatus.OK).body(new UserRegisterResponse(user));
+        return ResponseEntity.status(HttpStatus.OK).body(new UserResponse(user));
+    }
+
+    public ResponseEntity<UserResponse> getProfile(UserDetails userDetails) {
+        if (userDetails == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        UserResponse userResponse = new UserResponse(findOrElseThrow(userDetails.getUsername()));
+        return ResponseEntity.ok(userResponse);
+    }
+
+    public ResponseEntity<UserResponse> update(UserDetails userDetails, UpdateResquest updateResponse) {
+        if (userDetails == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        User user = findOrElseThrow(userDetails.getUsername());
+
+        user.setFirstName(updateResponse.getFirstName());
+        user.setLastName(updateResponse.getLastName());
+
+        User updateUser = userRepository.save(user);
+        return ResponseEntity.status(HttpStatus.OK).body(new UserResponse(updateUser));
     }
 
 
+    public ResponseEntity<UserResponse> delete(UserDetails userDetails) {
+        if (userDetails == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        User user = findOrElseThrow(userDetails.getUsername());
+        userRepository.delete(user);
+        return ResponseEntity.status(HttpStatus.OK).body(new UserResponse(user));
+    }
 }
