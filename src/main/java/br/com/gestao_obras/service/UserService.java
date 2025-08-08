@@ -30,9 +30,12 @@ public class UserService {
         this.jwtUtil = jwtUtil;
     }
 
+    private User findOrElseThrow(String email){
+        return userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+    }
+
     public ResponseEntity<LoginResponse> login(LoginRequest req) {
-        User user = userRepository.findByEmail(req.email())
-                .orElseThrow(() -> new RuntimeException("Credenciais inválidas"));
+        User user = findOrElseThrow(req.email());
         if (!passwordEncoder.matches(req.password(), user.getPassword())) {
             throw new RuntimeException("Credenciais inválidas");
         }
