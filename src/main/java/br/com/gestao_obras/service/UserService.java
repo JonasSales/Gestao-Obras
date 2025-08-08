@@ -56,7 +56,7 @@ public class UserService {
         registerRequest.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         User user = new User(registerRequest);
 
-        Role defaultRole = roleRepository.findByName(Role.roleAuthority.valueOf("ROLE_USER"))
+        Role defaultRole = roleRepository.findByName(Role.roleAuthority.valueOf("USER"))
                 .orElseThrow(() -> new RuntimeException("Role não encontrada"));
         user.setRoles(Set.of(defaultRole));
 

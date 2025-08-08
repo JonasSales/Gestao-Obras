@@ -20,7 +20,7 @@ public class Role {
     private roleAuthority name;
 
     public enum  roleAuthority {
-        ROLE_ADMIN,
-        ROLE_USER,
+        ADMIN,
+        USER,
     }
 }

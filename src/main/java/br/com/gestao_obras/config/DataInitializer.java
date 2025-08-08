@@ -13,8 +13,8 @@ public class DataInitializer {
     CommandLineRunner initRoles(RoleRepository roleRepository) {
         return args -> {
             if (roleRepository.count() == 0) {
-                roleRepository.save(new Role(null, Role.roleAuthority.ROLE_ADMIN));
-                roleRepository.save(new Role(null, Role.roleAuthority.ROLE_USER));
+                roleRepository.save(new Role(null, Role.roleAuthority.ADMIN));
+                roleRepository.save(new Role(null, Role.roleAuthority.USER));
                 System.out.println("Roles padrão criadas!");
             }
         };
