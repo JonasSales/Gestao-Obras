@@ -35,7 +35,7 @@ public class JwtUtil {
                 .sign(algorithm);
     }
 
-    public String extractUsername(String token) {
+    public String extractUserEmail(String token) {
         DecodedJWT decodedJWT = verifier.verify(token);
         return decodedJWT.getSubject();
     }
@@ -43,7 +43,7 @@ public class JwtUtil {
     public String validateToken(String token) {
         try {
             DecodedJWT decodedJWT = verifier.verify(token);
-            return decodedJWT.getSubject(); // Retorna o e-mail/username
+            return decodedJWT.getSubject();
         } catch (JWTVerificationException e) {
             throw new RuntimeException("Token inválido", e);
         }
