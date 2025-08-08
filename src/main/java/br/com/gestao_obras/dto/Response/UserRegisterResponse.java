@@ -1,15 +1,12 @@
 package br.com.gestao_obras.dto.Response;
 
 import br.com.gestao_obras.model.User;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
+
+@Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class UserRegisterResponse {
     private String firstName;
     private String lastName;
