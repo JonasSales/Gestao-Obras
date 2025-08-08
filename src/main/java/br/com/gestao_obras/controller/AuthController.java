@@ -4,7 +4,7 @@ package br.com.gestao_obras.controller;
 import br.com.gestao_obras.dto.Request.LoginRequest;
 import br.com.gestao_obras.dto.Request.RegisterRequest;
 import br.com.gestao_obras.dto.Response.LoginResponse;
-import br.com.gestao_obras.dto.Response.UserRegisterResponse;
+import br.com.gestao_obras.dto.Response.UserResponse;
 import br.com.gestao_obras.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +22,12 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserRegisterResponse> register(@RequestBody @Valid RegisterRequest req) {
+    public ResponseEntity<UserResponse> register(@RequestBody @Valid RegisterRequest req) {
         return userService.registerUser(req);
     }
-
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest req) {
         return userService.login(req);
     }
-
 }
