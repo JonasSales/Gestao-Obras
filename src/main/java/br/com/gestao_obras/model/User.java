@@ -1,6 +1,7 @@
 package br.com.gestao_obras.model;
 
-    import jakarta.persistence.*;
+import br.com.gestao_obras.dto.Request.RegisterRequest;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,10 +9,7 @@ import lombok.Setter;
     import org.springframework.security.core.GrantedAuthority;
     import org.springframework.security.core.userdetails.UserDetails;
 
-    import java.util.Collection;
-    import java.util.List;
-    import java.util.Set;
-import java.util.UUID;
+    import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -28,11 +26,12 @@ public class User implements UserDetails {
     private String firstName;
     private String lastName;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -42,5 +41,12 @@ public class User implements UserDetails {
     @Override
     public String getUsername() {
         return "";
+    }
+
+    public User(RegisterRequest registerRequest) {
+        this.email = registerRequest.getEmail();
+        this.password = registerRequest.getPassword();
+        this.firstName = registerRequest.getFirstName();
+        this.lastName = registerRequest.getLastName();
     }
 }
