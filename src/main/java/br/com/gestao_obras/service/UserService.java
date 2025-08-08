@@ -11,11 +11,15 @@ import br.com.gestao_obras.repository.RoleRepository;
 import br.com.gestao_obras.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -95,5 +99,16 @@ public class UserService {
         User user = findOrElseThrow(userDetails.getUsername());
         userRepository.delete(user);
         return ResponseEntity.status(HttpStatus.OK).body(new UserResponse(user));
+    }
+
+    public ResponseEntity<List<UserResponse>> getAllUsers(UserDetails userDetails) {
+        if (userDetails == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        List<User> listUsers = userRepository.findAll();
+        List<UserResponse> userResponseList = listUsers.stream()
+                .map(UserResponse::new).toList();
+        return ResponseEntity.status(HttpStatus.OK).body(userResponseList);
     }
 }

@@ -5,9 +5,12 @@ import br.com.gestao_obras.dto.Response.UserResponse;
 import br.com.gestao_obras.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
@@ -32,5 +35,11 @@ public class UserController {
     @DeleteMapping
     public ResponseEntity<UserResponse> deleteUser(@AuthenticationPrincipal UserDetails userDetails) {
         return userService.delete(userDetails);
+    }
+
+    @GetMapping("/admin")
+    //@PreAuthorize("hasAnyRole('ADMIN')")
+    public ResponseEntity<List<UserResponse>> getAllUsers(@AuthenticationPrincipal UserDetails userDetails) {
+        return userService.getAllUsers(userDetails);
     }
 }
