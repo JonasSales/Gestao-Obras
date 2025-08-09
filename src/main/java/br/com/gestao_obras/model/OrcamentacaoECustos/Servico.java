@@ -18,21 +18,21 @@ public class Servico {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    private String nome; // Nome simplificado
+    private String nome;
 
     @Column(columnDefinition = "TEXT")
-    private String descricao; // Nome simplificado
+    private String descricao;
 
-    @Enumerated(EnumType.STRING) // Boa prática
+    @Enumerated(EnumType.STRING)
     private UnidadeDeServico unidadeDeServico;
 
-    private BigDecimal custo; // Tipo corrigido e nome simplificado
+    private BigDecimal custo;
 
     public enum UnidadeDeServico {
         HORA,
         DIA,
         SEMANAL,
         MENSAL,
-        FIXO // Adicionei como sugestão para serviços com preço fechado
+        FIXO
     }
 }

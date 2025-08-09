@@ -31,7 +31,6 @@ public class MensagemPortal {
     @CreationTimestamp
     private LocalDateTime dataEnvio;
 
-    // --- Remetente ---
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "remetente_user_id")
     @JsonIgnore
@@ -42,7 +41,6 @@ public class MensagemPortal {
     @JsonIgnore
     private Cliente remetenteCliente;
 
-    // --- Destinatário ---
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "destinatario_user_id")
     @JsonIgnore

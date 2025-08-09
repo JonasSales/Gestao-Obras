@@ -21,13 +21,13 @@ public class RevisaoProjeto {
     private UUID id;
 
     @Column(nullable = false)
-    private Integer versao; // Tipo corrigido
+    private Integer versao;
 
     @Column(nullable = false)
-    private LocalDate data; // Nome e tipo corrigidos
+    private LocalDate data;
 
     @Column(columnDefinition = "TEXT")
-    private String alteracoes; // Nome mais descritivo
+    private String alteracoes;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "projeto_id")
@@ -35,5 +35,5 @@ public class RevisaoProjeto {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User revisor; // Nome mais claro
+    private User revisor;
 }

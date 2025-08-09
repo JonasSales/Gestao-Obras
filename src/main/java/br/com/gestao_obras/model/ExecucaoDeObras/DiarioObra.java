@@ -19,22 +19,21 @@ public class DiarioObra {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id; // Nome simplificado
+    private UUID id;
 
-    private LocalDate data; // Nome e tipo corrigidos
+    private LocalDate data;
 
-    @Column(columnDefinition = "TEXT") // Permite textos mais longos para a descrição
-    private String descricao; // Nome simplificado
+    @Column(columnDefinition = "TEXT")
+    private String descricao;
 
-    // Relacionamento com a nova entidade de Fotos
     @OneToMany(mappedBy = "diarioObra", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FotoDiario> fotos = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name = "obra_id") // Coluna simplificada
+    @JoinColumn(name = "obra_id")
     private Obra obra;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User autor; // Nome do relacionamento mais claro
+    private User autor;
 }

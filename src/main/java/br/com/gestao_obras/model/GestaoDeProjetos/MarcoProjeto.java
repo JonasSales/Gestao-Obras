@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate; // Importação correta
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -16,15 +16,14 @@ public class MarcoProjeto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id; // Nome simplificado
+    private UUID id;
 
-    private String nome; // Nome simplificado
+    private String nome;
 
-    private LocalDate dataPrevisaoConclusao; // Tipo corrigido
+    private LocalDate dataPrevisaoConclusao;
+    private LocalDate conclusaoReal;
 
-    private LocalDate conclusaoReal; // Tipo corrigido (pode ser nulo)
-
-    @Enumerated(EnumType.STRING) // Boa prática
+    @Enumerated(EnumType.STRING)
     private StatusMarco statusMarco;
 
     @ManyToOne(fetch = FetchType.LAZY)

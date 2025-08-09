@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate; // Importação correta
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -16,29 +16,28 @@ public class EtapaObra {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id; // Nome simplificado
+    private UUID id;
 
-    private String nome; // Nome simplificado
+    private String nome;
 
     @Column(columnDefinition = "TEXT")
-    private String descricao; // Nome simplificado
+    private String descricao;
 
-    private LocalDate dataInicioPrevista; // Tipo corrigido
+    private LocalDate dataInicioPrevista;
 
-    private LocalDate dataFimPrevista; // Tipo corrigido
+    private LocalDate dataFimPrevista;
 
-    private LocalDate dataConclusaoReal; // Tipo corrigido
+    private LocalDate dataConclusaoReal;
 
-    private Integer progressoPercentual; // Nome mais claro
+    private Integer progressoPercentual;
 
-    @Enumerated(EnumType.STRING) // Boa prática
+    @Enumerated(EnumType.STRING)
     private StatusProgresso statusEtapaObra;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "obra_id") // Coluna simplificada
+    @JoinColumn(name = "obra_id")
     private Obra obra;
 
-    // Enum que faltava foi adicionado aqui dentro
     public enum StatusProgresso {
         NAO_INICIADA,
         EM_ANDAMENTO,

@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate; // Importação correta
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -20,23 +20,23 @@ public class SolicitacaoCompra {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id; // Nome simplificado
+    private UUID id;
 
-    private LocalDate dataSolicitacao; // Nome e tipo corrigidos
+    private LocalDate dataSolicitacao;
 
-    @Enumerated(EnumType.STRING) // Boa prática
+    @Enumerated(EnumType.STRING)
     private StatusSolicitacao statusSolicitacao;
 
     @OneToMany(mappedBy = "solicitacaoCompra", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ItemSolicitacaoCompra> itens = new ArrayList<>(); // Lista de itens adicionada
+    private List<ItemSolicitacaoCompra> itens = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name = "obra_id") // Coluna simplificada
+    @JoinColumn(name = "obra_id")
     private Obra obra;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User solicitante; // Renomeado "user" para "solicitante" para mais clareza
+    private User solicitante;
 
     enum StatusSolicitacao {
         PENDENTE,

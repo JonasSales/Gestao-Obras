@@ -19,11 +19,11 @@ public class Compra {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID idCompra;
 
-    private LocalDate dataCompra; // Tipo alterado
+    private LocalDate dataCompra;
 
-    private BigDecimal valorCompra; // Tipo alterado
+    private BigDecimal valorCompra;
 
-    @Enumerated(EnumType.STRING) // Boa prática: Mapeia o enum pelo nome, não pelo índice
+    @Enumerated(EnumType.STRING)
     private StatusCompra statusCompra;
 
     @ManyToOne
@@ -32,7 +32,7 @@ public class Compra {
 
     @OneToOne
     @JoinColumn(name = "solicitacao_compra_id", unique = true)
-    private SolicitacaoCompra solicitacaoCompra; // Classe e relacionamento corrigidos
+    private SolicitacaoCompra solicitacaoCompra;
 
     enum StatusCompra{
         EMITIDA,

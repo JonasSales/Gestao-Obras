@@ -22,9 +22,9 @@ public class Fornecedor {
 
     private String nomeFornecedor;
 
-    @Column(unique = true) // Garante que o CNPJ seja único
+    @Column(unique = true)
     private String CNPJFornecedor;
 
     @OneToMany(mappedBy = "fornecedor", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Contato> contatoes = new ArrayList<>(); // Relacionamento corrigido
+    private List<Contato> contatoes = new ArrayList<>();
 }

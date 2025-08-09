@@ -5,8 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal; // Importação correta
-import java.time.LocalDate;  // Importação correta
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -36,7 +36,6 @@ public class PropostaComercial {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    // Relacionamento com os itens da proposta
     @OneToMany(mappedBy = "propostaComercial", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemPropostaComercial> itens = new ArrayList<>();
 
@@ -44,7 +43,7 @@ public class PropostaComercial {
     enum StatusProposta{
         RASCUNHO,
         ENVIADO,
-        ACEITA, // Alterado de REGISTRADO para um termo mais claro no contexto da proposta
-        REJEITADA // Alterado para manter o padrão
+        ACEITA,
+        REJEITADA
     }
 }

@@ -16,39 +16,29 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Cliente {
 
-    @Id // Chave primária
-    @GeneratedValue(strategy = GenerationType.AUTO) // Gera o ID automaticamente
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     private String nome;
 
-    // Relação com Contatos (considerando que Contato também é uma entidade)
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Contato> contatoes = new ArrayList<>();
 
-    @Enumerated(EnumType.STRING) // Grava o nome do enum (LEAD, PROSPECT) no banco
+    @Enumerated(EnumType.STRING)
     private TipoCliente tipoCliente;
 
-    @Enumerated(EnumType.STRING) // Grava o nome do enum (NOVO, NEGOCIACAO) no banco
+    @Enumerated(EnumType.STRING)
     private StatusCRM status;
 
-    // RELACIONAMENTOS ADICIONADOS AQUI
-    /**
-     * Um Cliente (1) pode ter muitas Propostas Comerciais (N).
-     * cascade = CascadeType.ALL: Se salvar/atualizar/remover um cliente, faz o mesmo com as propostas associadas.
-     * orphanRemoval = true: Se uma proposta for removida da lista, ela é apagada do banco.
-     */
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PropostaComercial> propostasComerciais = new ArrayList<>();
 
-    /**
-     * Um Cliente (1) pode ter muitos Projetos (N).
-     */
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Projeto> projetos = new ArrayList<>();
 
 
-    // Enums (como você já tinha)
+
     enum TipoCliente {
         LEAD,
         PROSPECT,

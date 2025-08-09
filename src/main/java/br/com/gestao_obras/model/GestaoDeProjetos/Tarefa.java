@@ -46,7 +46,6 @@ public class Tarefa {
     @JsonIgnore
     private User usuarioResponsavel;
 
-    // Relacionamento corrigido para uma lista de registros de tempo
     @OneToMany(mappedBy = "tarefa", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RegistroTempoTarefa> registrosDeTempo = new ArrayList<>();
 
@@ -54,7 +53,7 @@ public class Tarefa {
         A_FAZER,
         EM_PROCESSO,
         CONCLUIDA,
-        BLOQUEADA // Convenção corrigida
+        BLOQUEADA
     }
 
 }

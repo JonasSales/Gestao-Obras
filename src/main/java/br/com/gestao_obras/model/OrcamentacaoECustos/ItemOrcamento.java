@@ -33,13 +33,11 @@ public class ItemOrcamento {
     @JsonIgnore
     private Orcamento orcamento;
 
-    // NULO SE FOR SERVICO
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "material_id")
     @JsonIgnore
     private Material material;
 
-    // NULO SE FOR MATERIAL
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "servico_id")
     @JsonIgnore
@@ -50,10 +48,6 @@ public class ItemOrcamento {
         SERVICO
     }
 
-    /**
-     * Calcula o subtotal do item. Não é salvo no banco de dados.
-     * @return O subtotal (quantidade * valorUnitario).
-     */
     @Transient
     public BigDecimal getSubtotal() {
         if (quantidade == null || valorUnitario == null) {

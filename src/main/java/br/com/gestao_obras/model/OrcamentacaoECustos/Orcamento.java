@@ -27,10 +27,7 @@ public class Orcamento {
 
     private LocalDate dataCriacao;
 
-    // Sugestão: Este campo deve ser calculado, não armazenado. Veja o método getValorEstimado()
-    // private BigDecimal valorEstimado;
-
-    private BigDecimal margemDeLucro; // Ex: 0.15 para 15%
+    private BigDecimal margemDeLucro;
 
     @Enumerated(EnumType.STRING)
     private StatusViabilidade statusViabilidade;
@@ -49,21 +46,14 @@ public class Orcamento {
         ANALISE_PENDENTE
     }
 
-    /**
-     * Calcula o valor total estimado do orçamento somando os subtotais de todos os itens.
-     * @return O valor total do orçamento.
-     */
     @Transient
     public BigDecimal getValorEstimado() {
         return itemOrcamentos.stream()
-                .map(ItemOrcamento::getSubtotal) // Usa o método que criamos em ItemOrcamento
+                .map(ItemOrcamento::getSubtotal)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    /**
-     * Calcula o valor final de venda (Valor Estimado + Margem de Lucro).
-     * @return O valor final de venda.
-     */
+
     @Transient
     public BigDecimal getValorFinalVenda() {
         BigDecimal valorEstimado = getValorEstimado();

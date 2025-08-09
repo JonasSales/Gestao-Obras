@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime; // Importação correta
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -23,17 +23,16 @@ public class AprovacaoOnline {
 
     private String descricao;
 
-    private LocalDateTime dataSolicitacao; // Tipo corrigido
+    private LocalDateTime dataSolicitacao;
 
-    private LocalDateTime dataResposta; // Nome e tipo corrigidos
+    private LocalDateTime dataResposta;
 
     @Enumerated(EnumType.STRING)
     private StatusAprovado statusAprovado;
 
     @Enumerated(EnumType.STRING)
-    private TipoObjetoAprovacao tipoObjetoAprovacao; // Nome do enum mais genérico
+    private TipoObjetoAprovacao tipoObjetoAprovacao;
 
-    // Armazena o ID do objeto que está sendo aprovado (seja uma Proposta, Revisão, etc.)
     @Column(nullable = false)
     private UUID idObjetoAprovado;
 
@@ -45,7 +44,7 @@ public class AprovacaoOnline {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id")
     @JsonIgnore
-    private User solicitante; // Nome mais claro
+    private User solicitante;
 
     public enum StatusAprovado {
         PENDENTE,
@@ -53,9 +52,9 @@ public class AprovacaoOnline {
         REJEITADO
     }
 
-    public enum TipoObjetoAprovacao { // Nome do enum corrigido
+    public enum TipoObjetoAprovacao {
         PROPOSTA_COMERCIAL,
         REVISAO_PROJETO,
-        ETAPA_ORCAMENTO // Exemplo adicional
+        ETAPA_ORCAMENTO
     }
 }

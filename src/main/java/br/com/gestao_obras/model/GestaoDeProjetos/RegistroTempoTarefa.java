@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Duration;
-import java.time.LocalDateTime; // Importação correta
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -21,28 +21,20 @@ public class RegistroTempoTarefa {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    // Guarda a data e hora exata do início do trabalho
     private LocalDateTime inicio;
 
-    // Guarda a data e hora exata do fim do trabalho
     private LocalDateTime fim;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tarefa_id") // Nome da coluna simplificado
+    @JoinColumn(name = "tarefa_id")
     @JsonIgnore
     private Tarefa tarefa;
 
-    // Quem registrou o tempo
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private User usuarioQueRegistrouTempo;
 
-    /**
-     * Calcula a duração em minutos entre o início e o fim.
-     * A anotação @Transient impede que este campo seja criado no banco de dados.
-     * @return a duração total em minutos.
-     */
     @Transient
     public long getDuracaoEmMinutos() {
         if (inicio == null || fim == null) {

@@ -36,14 +36,12 @@ public class Obra {
     private LocalDate dataFimReal;
 
     @Enumerated(EnumType.STRING)
-    private StatusProgresso statusObra; // Assumindo que StatusProgresso é um enum público
+    private StatusProgresso statusObra;
 
-    // Relacionamento 1-para-1 com Projeto
     @OneToOne
     @JoinColumn(name = "projeto_id")
     private Projeto projeto;
 
-    // Relacionamentos 1-para-N com as entidades filhas
     @OneToMany(mappedBy = "obra", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EtapaObra> etapas = new ArrayList<>();
 

@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal; // Importação correta
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
@@ -19,15 +19,15 @@ public class ItemCompra {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID idItemCompra;
 
-    private BigDecimal quantidade; // Tipo alterado para mais flexibilidade
+    private BigDecimal quantidade;
 
-    private BigDecimal precoUnitario; // Tipo alterado para precisão monetária
+    private BigDecimal precoUnitario;
 
     @ManyToOne
-    @JoinColumn(name = "compra_id") // Nome da coluna simplificado
+    @JoinColumn(name = "compra_id")
     private Compra compra;
 
     @ManyToOne
-    @JoinColumn(name = "material_id") // Nome da coluna simplificado
+    @JoinColumn(name = "material_id")
     private Material material;
 }

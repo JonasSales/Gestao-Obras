@@ -6,10 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal; // Importação correta
+import java.math.BigDecimal;
 import java.util.UUID;
 
-// Nome da classe corrigido para maior clareza
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -18,16 +18,16 @@ public class ItemSolicitacaoCompra {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id; // Nome do ID simplificado
+    private UUID id;
 
-    private BigDecimal quantidade; // Tipo de dado mais flexível
+    private BigDecimal quantidade;
 
     @ManyToOne
-    @JoinColumn(name = "solicitacao_compra_id") // Nome da coluna simplificado
+    @JoinColumn(name = "solicitacao_compra_id")
     private SolicitacaoCompra solicitacaoCompra;
 
     @ManyToOne
-    @JoinColumn(name = "material_id") // Nome da coluna simplificado
+    @JoinColumn(name = "material_id")
     private Material material;
 
     private String observacao;

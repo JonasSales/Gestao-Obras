@@ -21,19 +21,18 @@ public class ContaAReceber {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id; // Nome simplificado
+    private UUID id;
 
     private String descricao;
 
-    private BigDecimal valor; // Tipo corrigido
+    private BigDecimal valor;
 
-    private LocalDate dataVencimento; // Tipo corrigido
+    private LocalDate dataVencimento;
 
-    private LocalDate dataRecebimento; // Nome mais específico e tipo corrigido
+    private LocalDate dataRecebimento;
 
     @Enumerated(EnumType.STRING)
-    private StatusDePagamento statusDePagamento; // Recomendo criar este enum em um arquivo separado
-
+    private StatusDePagamento statusDePagamento;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
@@ -42,14 +41,10 @@ public class ContaAReceber {
     @JoinColumn(name = "projeto_id")
     private Projeto projeto;
 
-    // Relacionamento com os pagamentos recebidos para esta conta
     @OneToMany(mappedBy = "contaAReceber", cascade = CascadeType.ALL)
     private List<Pagamento> pagamentos = new ArrayList<>();
 
-    /*
-     * Enum StatusDePagamento
-     * (Idealmente, este enum deve estar em seu próprio arquivo para ser reutilizado)
-     */
+
     public enum StatusDePagamento {
         PENDENTE,
         PAGO_PARCIALMENTE,

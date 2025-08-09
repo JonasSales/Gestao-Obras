@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal; // Importação correta
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
@@ -16,23 +16,22 @@ public class Material {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id; // Nome simplificado
+    private UUID id;
 
-    private String nome; // Nome simplificado
+    private String nome;
 
-    @Enumerated(EnumType.STRING) // Boa prática
+    @Enumerated(EnumType.STRING)
     private UnidadeDeMedida unidadeDeMedida;
 
-    // Custo por m², kg, unidade, litro
-    private BigDecimal custoUnitario; // Tipo corrigido e nome simplificado
+    private BigDecimal custoUnitario;
 
     @Column(columnDefinition = "TEXT")
     private String descricao;
 
     public enum UnidadeDeMedida {
         METRO_QUADRADO,
-        METRO_CUBICO, // Adicionei como sugestão
-        METRO_LINEAR, // Adicionei como sugestão
+        METRO_CUBICO,
+        METRO_LINEAR,
         QUILOGRAMA,
         UNIDADE,
         LITRO

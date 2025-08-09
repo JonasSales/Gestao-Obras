@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate; // Importação correta
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -53,17 +53,15 @@ public class Projeto {
     @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tarefa> tarefas = new ArrayList<>();
 
-    // Relacionamento 1-para-1 com Orçamento
     @OneToOne(mappedBy = "projeto", cascade = CascadeType.ALL)
     private Orcamento orcamento;
 
-    // Relacionamento 1-para-1 com Obra
     @OneToOne(mappedBy = "projeto", cascade = CascadeType.ALL)
     private Obra obra;
 
     public enum StatusProjeto{
         PLANEJAMENTO,
-        EM_EXECUCAO, // Adicionado para mais detalhe
+        EM_EXECUCAO,
         CONCLUIDO,
         CANCELADO
     }

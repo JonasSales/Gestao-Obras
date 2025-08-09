@@ -31,10 +31,10 @@ public class Pagamento {
     private MetodoDePagamento metodoDePagamento;
 
     @Enumerated(EnumType.STRING)
-    private StatusDePagamento statusDePagamento; // Use o enum público
+    private StatusDePagamento statusDePagamento;
 
     @Enumerated(EnumType.STRING)
-    private TipoMovimento tipoMovimento; // Use o enum público
+    private TipoMovimento tipoMovimento;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "conta_a_pagar_id")
@@ -49,7 +49,6 @@ public class Pagamento {
     @OneToOne(mappedBy = "pagamento", cascade = CascadeType.ALL)
     private MovimentoCaixa movimentoCaixa;
 
-    // Enum para os métodos de pagamento
     public enum MetodoDePagamento {
         PIX,
         BOLETO,

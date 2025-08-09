@@ -17,7 +17,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ContaAPagar { // Nome no singular
+public class ContaAPagar {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,25 +25,22 @@ public class ContaAPagar { // Nome no singular
 
     private String descricao;
 
-    private BigDecimal valor; // Tipo corrigido
+    private BigDecimal valor;
 
-    private LocalDate dataVencimento; // Tipo corrigido
-
-    private LocalDate dataPagamento; // Tipo corrigido (pode ser nulo se não foi pago)
+    private LocalDate dataVencimento;
+    private LocalDate dataPagamento;
 
     @Enumerated(EnumType.STRING)
     private StatusDePagamento statusDePagamento;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fornecedor_id") // Coluna simplificada
+    @JoinColumn(name = "fornecedor_id")
     private Fornecedor fornecedor;
 
-    // FK para PROJETO, opcional, se a conta for específica de um projeto
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "projeto_id")
     private Projeto projeto;
 
-    // Relacionamento com pagamentos para esta conta
     @OneToMany(mappedBy = "contaAPagar", cascade = CascadeType.ALL)
     private List<Pagamento> pagamentos = new ArrayList<>();
 
