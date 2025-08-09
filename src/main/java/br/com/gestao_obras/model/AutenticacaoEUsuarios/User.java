@@ -1,6 +1,8 @@
-package br.com.gestao_obras.model;
+package br.com.gestao_obras.model.AutenticacaoEUsuarios;
 
 import br.com.gestao_obras.dto.Request.RegisterRequest;
+import br.com.gestao_obras.model.GestaoDeProjetos.RegistroTempoTarefa;
+import br.com.gestao_obras.model.GestaoDeProjetos.Tarefa;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,8 +21,10 @@ import java.util.stream.Collectors;
 public class User implements UserDetails {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+
     @Column(unique = true)
     private String email;
+
     private String password;
     private String firstName;
     private String lastName;
@@ -31,6 +35,11 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    @OneToMany (mappedBy = "usuarioResponsavel")
+    private List<Tarefa> tarefas = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuarioQueRegistrouTempo")
+    private List<RegistroTempoTarefa> registrosTempoTarefa = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

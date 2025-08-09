@@ -1,4 +1,4 @@
-package br.com.gestao_obras.model;
+package br.com.gestao_obras.model.AutenticacaoEUsuarios;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
