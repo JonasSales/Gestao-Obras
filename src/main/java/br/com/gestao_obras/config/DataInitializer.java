@@ -1,6 +1,6 @@
 package br.com.gestao_obras.config;
 
-import br.com.gestao_obras.model.Role;
+import br.com.gestao_obras.model.AutenticacaoEUsuarios.Role;
 import br.com.gestao_obras.repository.RoleRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;

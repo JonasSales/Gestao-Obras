@@ -5,21 +5,18 @@ import br.com.gestao_obras.dto.Request.RegisterRequest;
 import br.com.gestao_obras.dto.Request.UpdateResquest;
 import br.com.gestao_obras.dto.Response.LoginResponse;
 import br.com.gestao_obras.dto.Response.UserResponse;
-import br.com.gestao_obras.model.Role;
-import br.com.gestao_obras.model.User;
+import br.com.gestao_obras.model.AutenticacaoEUsuarios.Role;
+import br.com.gestao_obras.model.AutenticacaoEUsuarios.User;
 import br.com.gestao_obras.repository.RoleRepository;
 import br.com.gestao_obras.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -50,7 +47,15 @@ public class UserService {
         return ResponseEntity.ok(new LoginResponse(token));
     }
 
-    public ResponseEntity<UserResponse> registerUser(RegisterRequest registerRequest) {
+    public ResponseEntity<UserResponse> getProfile(UserDetails userDetails) {
+        if (userDetails == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        UserResponse userResponse = new UserResponse(findOrElseThrow(userDetails.getUsername()));
+        return ResponseEntity.ok(userResponse);
+    }
+
+    public ResponseEntity<UserResponse> registerAccount(RegisterRequest registerRequest) {
 
         if (userRepository.findByEmail(registerRequest.getEmail()).isPresent()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -70,15 +75,7 @@ public class UserService {
         return ResponseEntity.status(HttpStatus.OK).body(new UserResponse(user));
     }
 
-    public ResponseEntity<UserResponse> getProfile(UserDetails userDetails) {
-        if (userDetails == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        UserResponse userResponse = new UserResponse(findOrElseThrow(userDetails.getUsername()));
-        return ResponseEntity.ok(userResponse);
-    }
-
-    public ResponseEntity<UserResponse> update(UserDetails userDetails, UpdateResquest updateResponse) {
+    public ResponseEntity<UserResponse> updateAccount(UserDetails userDetails, UpdateResquest updateResponse) {
         if (userDetails == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -91,8 +88,7 @@ public class UserService {
         return ResponseEntity.status(HttpStatus.OK).body(new UserResponse(updateUser));
     }
 
-
-    public ResponseEntity<UserResponse> delete(UserDetails userDetails) {
+    public ResponseEntity<UserResponse> deleteAccount(UserDetails userDetails) {
         if (userDetails == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
