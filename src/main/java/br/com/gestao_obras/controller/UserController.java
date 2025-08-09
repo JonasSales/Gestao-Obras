@@ -27,10 +27,16 @@ public class UserController {
     @PutMapping()
     public ResponseEntity<UserResponse> updateUser(@AuthenticationPrincipal UserDetails userDetails,
                                                    @Valid @RequestBody UpdateResquest updateResquest) {
-        return userService.update(userDetails, updateResquest);
+        return userService.updateAccount(userDetails, updateResquest);
     }
     @DeleteMapping
     public ResponseEntity<UserResponse> deleteUser(@AuthenticationPrincipal UserDetails userDetails) {
-        return userService.delete(userDetails);
+        return userService.deleteAccount(userDetails);
     }
+
+//    @GetMapping("/admin")
+//    //@PreAuthorize("hasAnyRole('ADMIN')")
+//    public ResponseEntity<List<UserResponse>> getAllUsers(@AuthenticationPrincipal UserDetails userDetails) {
+//        return userService.getAllUsers(userDetails);
+//    }
 }

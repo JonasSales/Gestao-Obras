@@ -1,6 +1,6 @@
 package br.com.gestao_obras.dto.Response;
 
-import br.com.gestao_obras.model.User;
+import br.com.gestao_obras.model.AutenticacaoEUsuarios.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
