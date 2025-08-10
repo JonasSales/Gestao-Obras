@@ -1,10 +1,10 @@
 package br.com.gestao_obras.controller;
 
 
-import br.com.gestao_obras.dto.Request.LoginRequest;
-import br.com.gestao_obras.dto.Request.RegisterRequest;
-import br.com.gestao_obras.dto.Response.LoginResponse;
-import br.com.gestao_obras.dto.Response.UserResponse;
+import br.com.gestao_obras.dto.request.LoginRequest;
+import br.com.gestao_obras.dto.request.RegisterRequest;
+import br.com.gestao_obras.dto.response.LoginResponse;
+import br.com.gestao_obras.dto.response.UserResponse;
 import br.com.gestao_obras.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

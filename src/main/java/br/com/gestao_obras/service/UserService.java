@@ -1,12 +1,12 @@
 package br.com.gestao_obras.service;
 
-import br.com.gestao_obras.dto.Request.LoginRequest;
-import br.com.gestao_obras.dto.Request.RegisterRequest;
-import br.com.gestao_obras.dto.Request.UpdateResquest;
-import br.com.gestao_obras.dto.Response.LoginResponse;
-import br.com.gestao_obras.dto.Response.UserResponse;
-import br.com.gestao_obras.model.AutenticacaoEUsuarios.Role;
-import br.com.gestao_obras.model.AutenticacaoEUsuarios.User;
+import br.com.gestao_obras.dto.request.LoginRequest;
+import br.com.gestao_obras.dto.request.RegisterRequest;
+import br.com.gestao_obras.dto.request.UpdateResquest;
+import br.com.gestao_obras.dto.response.LoginResponse;
+import br.com.gestao_obras.dto.response.UserResponse;
+import br.com.gestao_obras.model.autenticacaoeusuarios.Role;
+import br.com.gestao_obras.model.autenticacaoeusuarios.User;
 import br.com.gestao_obras.repository.RoleRepository;
 import br.com.gestao_obras.repository.UserRepository;
 import org.springframework.http.HttpStatus;

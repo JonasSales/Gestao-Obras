@@ -1,6 +1,6 @@
 package br.com.gestao_obras.repository;
 
-import br.com.gestao_obras.model.AutenticacaoEUsuarios.Role;
+import br.com.gestao_obras.model.autenticacaoeusuarios.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

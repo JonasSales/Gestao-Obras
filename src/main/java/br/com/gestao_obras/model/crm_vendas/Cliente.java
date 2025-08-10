@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 // Importações comuns para JPA (Java Persistence API)
-import br.com.gestao_obras.model.GestaoDeProjetos.Projeto;
+import br.com.gestao_obras.model.gestaodeprojetos.Projeto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,8 +22,8 @@ public class Cliente {
 
     private String nome;
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Contato> contatoes = new ArrayList<>();
+    @OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Contato contatos;
 
     @Enumerated(EnumType.STRING)
     private TipoCliente tipoCliente;

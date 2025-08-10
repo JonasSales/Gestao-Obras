@@ -1,6 +1,6 @@
 package br.com.gestao_obras.repository;
 
-import br.com.gestao_obras.model.AutenticacaoEUsuarios.User;
+import br.com.gestao_obras.model.autenticacaoeusuarios.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

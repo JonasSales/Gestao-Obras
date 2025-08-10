@@ -1,6 +1,6 @@
 package br.com.gestao_obras.model.crm_vendas;
 
-import br.com.gestao_obras.model.ComprasESuprimentos.Fornecedor;
+import br.com.gestao_obras.model.comprasesuprimentos.Fornecedor;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,13 +24,13 @@ public class Contato {
     private String telefone;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id")
     @JsonIgnore
     private Cliente cliente;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fornecedor_id")
     @JsonIgnore
     private Fornecedor fornecedor;
