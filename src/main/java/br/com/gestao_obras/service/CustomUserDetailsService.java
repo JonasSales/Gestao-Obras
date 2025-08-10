@@ -2,7 +2,7 @@ package br.com.gestao_obras.service;
 
 
 
-import br.com.gestao_obras.model.AutenticacaoEUsuarios.User;
+import br.com.gestao_obras.model.autenticacaoeusuarios.User;
 import br.com.gestao_obras.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

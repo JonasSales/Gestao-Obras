@@ -1,7 +1,7 @@
 package br.com.gestao_obras.controller;
 
-import br.com.gestao_obras.dto.Request.UpdateResquest;
-import br.com.gestao_obras.dto.Response.UserResponse;
+import br.com.gestao_obras.dto.request.UpdateResquest;
+import br.com.gestao_obras.dto.response.UserResponse;
 import br.com.gestao_obras.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
